@@ -1,6 +1,10 @@
 class BaseQueueClient {
-    constructor(queueName) {
+    /**
+     * Init queue client with queue name, connection config if applies
+     */
+    constructor(queueName, connectionConfig = {}) {
         this._queueName = queueName;
+        this._connectionConfig = connectionConfig;
     }
 
     /**
@@ -9,7 +13,7 @@ class BaseQueueClient {
      * @param {Object} job item 
      * @returns null
      */
-    addToQueue(item) {
+    async addToQueue(item) {
         throw new Error('Implementation not available for addToQueue');
     }
 

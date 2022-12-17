@@ -2,18 +2,15 @@ const Bull = require('bull');
 const BaseQueueClient = require('./baseQueueClient');
 
 class BullQueueClient extends BaseQueueClient {
-    constructor(queueName, options) {
-        super(queueName, options);
+    constructor(queueName, connectionConfig = {}) {
+        super(queueName, connectionConfig);
         this._queue = new Bull(queueName);
-        
-        const defaultOptions = {
+        this._options = {
             removeOnComplete: true,
             delay: 1000, // in ms
             attempts: 3,
             backoff: 60000 // static 1 min delay between retries
         };
-
-        this._options = options || defaultOptions;
     }
 
     /**
