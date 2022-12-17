@@ -1,0 +1,15 @@
+{
+  "name": "source-clients",
+  "version": "1.0.0",
+  "description": "Assignment",
+  "main": "index.js",
+  "dependencies": {
+    "aws-sdk": "^2.1277.0",
+    "commons": "file:../commons"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": ""
+}
