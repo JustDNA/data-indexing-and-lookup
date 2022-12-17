@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "Assignment",
   "dependencies": {
+    "commons": "file:../commons",
+    "node-cron": "^3.0.2",
     "queue-clients": "file:../clients/queueClients",
-    "commons": "file:../commons"
+    "source-clients": "file:../clients/sourceClients"
   },
   "devDependencies": {},
   "scripts": {

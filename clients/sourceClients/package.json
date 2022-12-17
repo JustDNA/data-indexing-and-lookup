@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "aws-sdk": "^2.1277.0",
-    "commons": "file:../commons"
+    "commons": "file:../../commons"
   },
   "devDependencies": {},
   "scripts": {

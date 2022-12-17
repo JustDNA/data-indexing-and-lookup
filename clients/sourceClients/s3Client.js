@@ -40,7 +40,7 @@ class S3Client extends BaseSourceClient {
         /**
          * For POC, not paginating. 1000 results we get in 1st page is sufficient
          */
-        const s3ListObjects = await util.promisify(this._s3.listObjects)(params);
+        const s3ListObjects = await util.promisify(this._s3.listObjects).bind(this._s3)(params);
         
         return s3ListObjects;
     }
@@ -66,4 +66,4 @@ class S3Client extends BaseSourceClient {
     }
 }
 
-module.exports = BullQueueClient;
+module.exports = S3Client;
