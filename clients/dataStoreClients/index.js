@@ -1,0 +1,1 @@
+exports.DataStoreClientFactory = require('./dataStoreClientFactory');

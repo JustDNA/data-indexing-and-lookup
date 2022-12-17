@@ -1,0 +1,14 @@
+{
+  "name": "queue-clients",
+  "version": "1.0.0",
+  "description": "Assignment",
+  "main": "index.js",
+  "dependencies": {
+    "redis": "^4.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": ""
+}
