@@ -1,0 +1,14 @@
+{
+  "name": "queue-clients",
+  "version": "1.0.0",
+  "description": "Assignment",
+  "main": "index.js",
+  "dependencies": {
+    "bull": "^4.10.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": ""
+}

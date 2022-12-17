@@ -1,0 +1,14 @@
+{
+  "name": "data-source-monitor",
+  "version": "1.0.0",
+  "description": "Assignment",
+  "dependencies": {
+    "queue-clients": "file:../clients/queueClients",
+    "commons": "file:../commons"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": ""
+}

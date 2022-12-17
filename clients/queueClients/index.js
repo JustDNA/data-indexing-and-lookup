@@ -1,0 +1,1 @@
+exports.QueueClientFactory = require('./queueClientFactory');
