@@ -24,7 +24,10 @@ const monitorHandler = async (job) => {
     const sourceFilesToIndex = await sourceClient.listSourceFiles();
     for (const file of sourceFilesToIndex) {
         console.log(`\n\nEnquing file to be indexed: ${JSON.stringify(file)}`);
-        await indexerQueueClient.addToQueue(file);   
+        await indexerQueueClient.addToQueue({
+            pipelineConfig,
+            file
+        });   
     }
 }
 
