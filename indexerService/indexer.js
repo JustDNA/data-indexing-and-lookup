@@ -1,6 +1,6 @@
 const constants = require('commons').Constants;
+const helpers = require('commons').Helpers;
 const SourceClientFactory = require('source-clients').SourceClientFactory;
-const textract = require('textract');
 const QueueClientFactory = require('queue-clients').QueueClientFactory;
 const util = require('util');
 
@@ -22,23 +22,10 @@ const fetchFile = async (eventData) => {
     return await sourceClient.getFile(eventData.file);
 }
 
-const fetchTextFromFile = async (fileType, fileBuffer) => {
-    try {
-        const text =
-            await util.promisify(textract.fromBufferWithMime)(fileType, fileBuffer);
-        console.log(text);
-    } catch (err) {
-        console.log(err);
-    }
-}
-
 const jobHandler = async (job) => {
     console.info(`\n\nIndexing file ${JSON.stringify(job.data.file)}`);
     const fileData = await fetchFile(job.data);
-    if (fileData.type !== 'image/jpeg') {
-        return;
-    }
-    const text = await fetchTextFromFile(fileData.type, fileData.buffer);
+    const text = await helpers.getTextFromFile(fileData.type, fileData.buffer);
 }
 
 indexerQueueClient.listenToQueue(jobHandler);

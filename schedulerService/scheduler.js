@@ -21,7 +21,7 @@ const dataStoreClient = DataStoreClientFactory.createDataStoreClient();
  */
 (async () => {
     const pipelinesConfigsString =
-        await dataStoreClient.get(constants.DATASTORE_TABLES.PILELINE_CONFIGS);
+        await dataStoreClient.get(constants.DATASTORE_TABLES.PIPELINE_CONFIGS);
     const pipelinesConfigs = JSON.parse(pipelinesConfigsString);
     
     console.log('PIPELINES CONFIGS', pipelinesConfigs);

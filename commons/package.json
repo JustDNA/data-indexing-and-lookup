@@ -4,7 +4,8 @@
   "description": "Assignment",
   "main": "index.js",
   "dependencies": {
-    "cron-parser": "^4.7.0"
+    "cron-parser": "^4.7.0",
+    "textract": "^2.5.0"
   },
   "devDependencies": {},
   "scripts": {

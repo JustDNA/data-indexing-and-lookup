@@ -5,8 +5,7 @@
   "dependencies": {
     "commons": "file:../commons",
     "queue-clients": "file:../clients/queueClients",
-    "source-clients": "file:../clients/sourceClients",
-    "textract": "^2.5.0"
+    "source-clients": "file:../clients/sourceClients"
   },
   "devDependencies": {},
   "scripts": {

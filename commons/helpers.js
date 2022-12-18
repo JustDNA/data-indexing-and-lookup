@@ -1,4 +1,14 @@
+/**
+ * This is a helper lib quickly put together.
+ * Ideally, we will have more cron/time related operations.
+ * Similarly more around file classification and processing operations.
+ * All time and cron related functionalities can become their own module.
+ * File related operations can become their own module and
+ * even their own service component.
+ */
+
 var cronParser = require('cron-parser');
+const textract = require('textract');
 
 /**
  * @method getLastTimeWindowForCron
@@ -22,4 +32,17 @@ exports.getLastTimeWindowForCron = function(cronExpression) {
         0, // TEMP
         endTimestamp
     ]
+};
+
+/**
+ * @method getTextFromFile
+ * @description Given file type and buffer, this method returns
+ * the text contents of a file. The list of supported file types
+ * are listed here: https://www.npmjs.com/package/textract/v/2.4.0#currently-extracts
+ * @param {String} fileType 
+ * @param {Buffer} fileBuffer 
+ * @returns {String} text contents of the file
+ */
+exports.getTextFromFile = async function(fileType, fileBuffer) {
+    const text = await util.promisify(textract.fromBufferWithMime)(fileType, fileBuffer);
 };
