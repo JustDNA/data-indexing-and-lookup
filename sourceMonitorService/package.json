@@ -4,8 +4,8 @@
   "description": "Assignment",
   "dependencies": {
     "commons": "file:../commons",
-    "queue-clients": "file:../clients/queueClients",
-    "source-clients": "file:../clients/sourceClients"
+    "source-clients": "file:../clients/sourceClients",
+    "queue-clients": "file:../clients/queueClients"
   },
   "devDependencies": {},
   "scripts": {

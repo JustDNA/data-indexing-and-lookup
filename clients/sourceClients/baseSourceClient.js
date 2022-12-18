@@ -24,7 +24,7 @@ class BaseSourceClient {
      * @param {Object} sourceFileLocation file location
      * @returns {Object} file metadata
      */
-    getFileMetadata(sourceFileLocation) {
+    async getFileMetadata(sourceFileLocation) {
         throw new Error('Implementation not available for listenToQueue');
     }
 
@@ -34,7 +34,7 @@ class BaseSourceClient {
      * @param {Object} sourceFileLocation file location
      * @returns {Object} file
      */
-    getFile(sourceFileLocation) {
+    async getFile(sourceFileLocation) {
         throw new Error('Implementation not available for listenToQueue');
     }
 }

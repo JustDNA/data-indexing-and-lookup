@@ -55,8 +55,8 @@ class S3Client extends BaseSourceClient {
      * @param {Object} sourceFileLocation file location
      * @returns {Object} file metadata
      */
-    getFileMetadata(sourceFileLocation) {
-        throw new Error('Implementation not available for listenToQueue');
+    async getFileMetadata(sourceFileLocation) {
+        throw new Error('Implementation not available for listenToQueue'); // tbd
     }
 
     /**
@@ -65,8 +65,13 @@ class S3Client extends BaseSourceClient {
      * @param {Object} sourceFileLocation file location
      * @returns {Object} file
      */
-    getFile(sourceFileLocation) {
-        throw new Error('Implementation not available for listenToQueue');
+    async getFile(sourceFileLocation) {
+        const params = {
+            Bucket: this._sourceConfig.bucket,
+            Key: sourceFileLocation.Key
+        };
+        const response = await util.promisify(this._s3.getObject).bind(this._s3)(params);
+        return response.Body;
     }
 }
 

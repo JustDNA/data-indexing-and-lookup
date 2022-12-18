@@ -38,12 +38,12 @@ const dataStoreClient = DataStoreClientFactory.createDataStoreClient();
                 `with start time ${startTimestamp} and end time ${endTimestamp}`);
             
                 await monitorQueueClient.addToQueue({
-                config,
-                timewindow: {
-                    startTimestamp,
-                    endTimestamp
-                }
-            });
+                    config,
+                    timewindow: {
+                        startTimestamp,
+                        endTimestamp
+                    }
+                });
         });
     }
 })();

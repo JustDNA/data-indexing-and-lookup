@@ -17,11 +17,11 @@ const indexerQueueClient = QueueClientFactory.createQueueClient(
                             );
 
 const monitorHandler = async (job) => {
-    const pipelineConfig = job.data.config;
+    const config = job.data.config;
     const startTimestamp = job.data.timewindow.startTimestamp;
     const endTimestamp = job.data.timewindow.endTimestamp;
     const sourceClient = SourceClientFactory.createSourceClient(
-                            pipelineConfig.sourceType, pipelineConfig.sourceConfig
+                            config.sourceType, config.sourceConfig
                         );
     const sourceFilesToIndex = await sourceClient.listSourceFiles(startTimestamp, endTimestamp);
     
@@ -33,7 +33,7 @@ const monitorHandler = async (job) => {
     for (const file of sourceFilesToIndex) {
         console.log(`\n\nEnquing file to be indexed: ${JSON.stringify(file)}`);
         await indexerQueueClient.addToQueue({
-            pipelineConfig,
+            config,
             file
         });   
     }

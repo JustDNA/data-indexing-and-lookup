@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Assignment",
   "dependencies": {
+    "source-clients": "file:../clients/sourceClients",
     "queue-clients": "file:../clients/queueClients",
     "commons": "file:../commons"
   },
