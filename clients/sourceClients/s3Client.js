@@ -39,7 +39,12 @@ class S3Client extends BaseSourceClient {
          * For POC, not paginating. 1000 results we get in 1st page is sufficient
          */
         const response = await util.promisify(this._s3.listObjects).bind(this._s3)(params);
-        const filesList = response.Contents;
+
+        // client side filtering of files modified in given time window
+        const filesList = response.Contents.filter(file => {
+            const modifiedTimestamp = new Date(file.LastModified).getTime();
+            return modifiedTimestamp >= startTimestamp && modifiedTimestamp < endTimestamp;
+        });
 
         return filesList;
     }

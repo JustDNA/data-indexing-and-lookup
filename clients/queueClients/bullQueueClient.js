@@ -26,7 +26,7 @@ class BullQueueClient extends BaseQueueClient {
 
     _handlerCompleted(job) {
         console.info(
-            `Job in ${job.queue.name} completed for: ${job.data.message}`
+            `Job in ${job.queue.name} completed for: ${job.id}`
         )
         job.remove()
     }
