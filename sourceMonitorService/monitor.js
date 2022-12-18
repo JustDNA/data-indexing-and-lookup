@@ -24,6 +24,12 @@ const monitorHandler = async (job) => {
                             pipelineConfig.sourceType, pipelineConfig.sourceConfig
                         );
     const sourceFilesToIndex = await sourceClient.listSourceFiles(startTimestamp, endTimestamp);
+    
+    if (sourceFilesToIndex.length < 1) {
+        console.log(`\n\nNo files have been modified at source. skipping...`);
+        return;
+    }
+    
     for (const file of sourceFilesToIndex) {
         console.log(`\n\nEnquing file to be indexed: ${JSON.stringify(file)}`);
         await indexerQueueClient.addToQueue({
