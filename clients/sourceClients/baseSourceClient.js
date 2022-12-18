@@ -1,21 +1,20 @@
 class BaseSourceClient {
     /**
-     * Init source client with connection config if applies
+     * Init source client with source config
      */
-    constructor(connectionConfig = {}) {
-        this._connectionConfig = connectionConfig;
+    constructor(sourceConfig) {
+        this._sourceConfig = sourceConfig;
     }
 
     /**
      * @method (abstract) listSourceFiles
      * @description List files at the source that were created/updated
      * in given time window
-     * @param {Object} sourceLocation location of source files. eg: a particular directory
      * @param {Number} startTimestamp
      * @param {Number} endTimestamp
      * @returns {Map<String, Number>} Map of file name to modified timestamp
      */
-    async listSourceFiles(sourceLocation, startTimestamp, endTimestamp) {
+    async listSourceFiles(startTimestamp, endTimestamp) {
         throw new Error('Implementation not available for listSourceFiles');
     }
 

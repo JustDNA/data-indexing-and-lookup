@@ -2,11 +2,10 @@ const S3Client = require('./s3Client');
 const constants = require('commons').Constants;
 
 class SourceClientFactory {
-    static createSourceClient(datasourceType) {
-        switch (datasourceType) {
+    static createSourceClient(sourceType, sourceConfig) {
+        switch (sourceType) {
             case constants.DATASOURCES.S3:
-                const connectionConfig = {}; // local setup
-                return new S3Client(connectionConfig);        
+                return new S3Client(sourceConfig);        
                 break;
             default:
                 break;

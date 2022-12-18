@@ -1,29 +1,31 @@
 const constants = require('commons').Constants;
-var cron = require('node-cron');
 const SourceClientFactory = require('source-clients').SourceClientFactory;
 const QueueClientFactory = require('queue-clients').QueueClientFactory;
 
-const queueClient = QueueClientFactory.createQueueClient(constants.S3_QUEUE_NAME);
-const s3Client = SourceClientFactory.createSourceClient(constants.DATASOURCES.S3);
+const PIPELINE_NAME = process.env.PIPELINE_NAME;
+if (!PIPELINE_NAME) {
+    throw new Error(`PIPELINE_NAME env var needs to be set for monitor service`);
+}
 
-const SOURCE_BUCKET = 'borneo-assignment-test-bucket';
-const SCHEDULE = '*/2 * * * * *';
-const SCHEDULE2 = '*/4 * * * * *';
+const monitorQueueClient = QueueClientFactory.createQueueClient(
+                                PIPELINE_NAME,
+                                constants.PIPELINE_STAGES.SOURCE_MONITOR
+                            );
+const indexerQueueClient = QueueClientFactory.createQueueClient(
+                                PIPELINE_NAME,
+                                constants.PIPELINE_STAGES.FILE_INDEXING
+                            );
 
-cron.schedule(SCHEDULE, async () => {
-    console.log('task 1');
-    // const files = await s3Client.listSourceFiles({
-    //     bucket: SOURCE_BUCKET
-    // });
-    // console.log(`Files list`, files);
-    //     await queueClient.addToQueue(data);
-});
+const monitorHandler = async (job) => {
+    const pipelineConfig = job.data;
+    const sourceClient = SourceClientFactory.createSourceClient(
+                            pipelineConfig.sourceType, pipelineConfig.sourceConfig
+                        );
+    const sourceFilesToIndex = await sourceClient.listSourceFiles();
+    for (const file of sourceFilesToIndex) {
+        console.log(`\n\nEnquing file to be indexed: ${JSON.stringify(file)}`);
+        await indexerQueueClient.addToQueue(file);   
+    }
+}
 
-cron.schedule(SCHEDULE2, async () => {
-    console.log('task 2');
-    // const files = await s3Client.listSourceFiles({
-    //     bucket: SOURCE_BUCKET
-    // });
-    // console.log(`Files list`, files);
-    //     await queueClient.addToQueue(data);
-});
+monitorQueueClient.listenToQueue(monitorHandler);

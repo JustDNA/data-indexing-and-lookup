@@ -4,14 +4,15 @@ const util = require('util');
 
 class S3Client extends BaseSourceClient {
     /**
-     * Init source client with connection config if applies
+     * Init source client with source config
      */
-    constructor(connectionConfig = {}) {
-        super(connectionConfig);
+    constructor(sourceConfig) {
+        super(sourceConfig);
         /**
-         * In case of non local setup, using this._connectionConfig we
+         * In case of non local setup, we
          * will have to assume necessary role and get temp creds for the AWS
-         * object
+         * object. For local POC, skipping the step since aws is already configured
+         * in host machone
          */
         this._s3 = new AWS.S3();
     }
@@ -20,16 +21,13 @@ class S3Client extends BaseSourceClient {
      * @method (abstract) listSourceFiles
      * @description List files at the source that were created/updated
      * in given time window
-     * @param {Object} sourceLocation location of source files. eg: a bucket
      * @param {Number} startTimestamp
      * @param {Number} endTimestamp
      * @returns {Map<String, Number>} Map of file name to modified timestamp
      */
-    async listSourceFiles(sourceLocation, startTimestamp, endTimestamp) {
+    async listSourceFiles(startTimestamp, endTimestamp) {
         const params = { 
-            Bucket: sourceLocation.bucket,
-            Delimiter: '/',
-            Prefix: sourceLocation.prefix
+            Bucket: this._sourceConfig.bucket
         }
      
         /**
@@ -40,9 +38,10 @@ class S3Client extends BaseSourceClient {
         /**
          * For POC, not paginating. 1000 results we get in 1st page is sufficient
          */
-        const s3ListObjects = await util.promisify(this._s3.listObjects).bind(this._s3)(params);
-        
-        return s3ListObjects;
+        const response = await util.promisify(this._s3.listObjects).bind(this._s3)(params);
+        const filesList = response.Contents;
+
+        return filesList;
     }
 
     /**
