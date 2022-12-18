@@ -70,6 +70,20 @@ class S3Client extends BaseSourceClient {
     }
 
     /**
+     * @method (abstract) getFileUniqueId
+     * @description gets a unique identifier for a file, can
+     * be from source or generated from composite params
+     * @param {Object} sourceFileLocation file location
+     * @returns {String} id
+     */
+    async getFileUniqueId(sourceFileLocation) {
+        const fileUniqueString =
+            `${this._sourceConfig.bucket}|${sourceFileLocation.Key}`;
+        const id = Buffer.from(fileUniqueString).toString('base64');
+        return id;
+    }
+
+    /**
      * @method (abstract) getFile
      * @description gets a source file
      * @param {Object} sourceFileLocation file location

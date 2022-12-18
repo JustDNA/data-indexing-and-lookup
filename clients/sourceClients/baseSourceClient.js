@@ -29,6 +29,17 @@ class BaseSourceClient {
     }
 
     /**
+     * @method (abstract) getFileUniqueId
+     * @description gets a unique identifier for a file, can
+     * be from source or generated from composite params
+     * @param {Object} sourceFileLocation file location
+     * @returns {String} id
+     */
+    async getFileUniqueId(sourceFileLocation) {
+        throw new Error('Implementation not available for listenToQueue');
+    }
+
+    /**
      * @method (abstract) getFile
      * @description gets a source file
      * @param {Object} sourceFileLocation file location

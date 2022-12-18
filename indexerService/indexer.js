@@ -14,9 +14,9 @@ const indexerQueueClient = QueueClientFactory.createQueueClient(
     constants.PIPELINE_STAGES.FILE_INDEXING
 );
 
-const indexFileData = async (text, metadata) => {
+const indexFileData = async (text, metadata, fileUniqueId) => {
     const searchEngineClient = SearchEngineClientFactory.createSearchEngineClient();
-    await searchEngineClient.indexText(text, metadata);
+    await searchEngineClient.indexText(text, metadata, fileUniqueId);
 };
 
 const jobHandler = async (job) => {
@@ -28,10 +28,11 @@ const jobHandler = async (job) => {
                         );
     const fileData = await sourceClient.getFile(job.data.file);
     const fileMetadata = await sourceClient.getFileMetadata(job.data.file);
+    const fileUniqueId = await sourceClient.getFileUniqueId(job.data.file);
 
     const text = await helpers.getTextFromFile(fileData.type, fileData.buffer);
     
-    await indexFileData(text, fileMetadata);
+    await indexFileData(text, fileMetadata, fileUniqueId);
 }
 
 indexerQueueClient.listenToQueue(jobHandler);

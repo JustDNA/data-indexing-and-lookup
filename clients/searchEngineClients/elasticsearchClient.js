@@ -13,12 +13,14 @@ class ElasticsearchClient extends BaseSearchEngineClient {
      * @description index the given text data to a given search engine index
      * @param {String} data text data to be indexed
      * @param {Object} metadata metadata information of the file
+     * @param {String} fileUniqueId unique id for file
      * @param {String} index (optional) search engine index name
      * @returns null
      */
-    async indexText(data, metadata, index = constants.DEFAULT_SEARCH_ENGINE_INDEX_NAME) {
+    async indexText(data, metadata, fileUniqueId, index = constants.DEFAULT_SEARCH_ENGINE_INDEX_NAME) {
         await this._client.index({
             index,
+            id: fileUniqueId,
             document: {
                 metadata,
                 data
