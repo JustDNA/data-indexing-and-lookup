@@ -12,7 +12,7 @@ const indexerQueueClient = QueueClientFactory.createQueueClient(
 );
 
 const jobHandler = async (job) => {
-    console.info(`running job! with id ${job.id}`);
+    console.info(`\n\nIndexing file ${JSON.stringify(job.data.file)}`);
 }
 
 indexerQueueClient.listenToQueue(jobHandler);

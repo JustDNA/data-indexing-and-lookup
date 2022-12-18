@@ -33,10 +33,11 @@ const dataStoreClient = DataStoreClientFactory.createDataStoreClient();
                 constants.PIPELINE_STAGES.SOURCE_MONITOR
             );
         cron.schedule(config.schedule, async () => {
-            [ startTimestamp, endTimestamp ] = helpers.getLastTimeWindowForCron(config.schedule);
+            const [ startTimestamp, endTimestamp ] = helpers.getLastTimeWindowForCron(config.schedule);
             console.log(`\ntriggering pipeline ${config.pipelineName} ` +
                 `with start time ${startTimestamp} and end time ${endTimestamp}`);
-            await monitorQueueClient.addToQueue({
+            
+                await monitorQueueClient.addToQueue({
                 config,
                 timewindow: {
                     startTimestamp,
