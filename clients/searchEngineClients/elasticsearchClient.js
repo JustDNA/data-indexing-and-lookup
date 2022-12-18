@@ -35,7 +35,15 @@ class ElasticsearchClient extends BaseSearchEngineClient {
      * @returns {Object} source information
      */
     async searchText(searchText, index = constants.DEFAULT_SEARCH_ENGINE_INDEX_NAME) {
-        throw new Error('Implementation not available for searchText');
+        const result = await this._client.search({
+            index,
+            query: {
+                match: {
+                data: searchText
+                }
+            }
+        });
+        return result;
     }
 }
 
