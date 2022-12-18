@@ -39,11 +39,14 @@ class ElasticsearchClient extends BaseSearchEngineClient {
             index,
             query: {
                 match: {
-                data: searchText
+                    data: searchText
                 }
             }
         });
-        return result;
+        const metadataList = result.hits.hits.map((hit) => {
+            return hit._source.metadata;
+        });
+        return metadataList;
     }
 }
 
