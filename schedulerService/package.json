@@ -1,0 +1,16 @@
+{
+  "name": "data-source-monitor",
+  "version": "1.0.0",
+  "description": "Assignment",
+  "dependencies": {
+    "commons": "file:../commons",
+    "datastore-clients": "file:../clients/dataStoreClients",
+    "node-cron": "^3.0.2",
+    "queue-clients": "file:../clients/queueClients"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": ""
+}
