@@ -1,11 +1,10 @@
 const BaseDataStoreClient = require('./baseDataStoreClient');
-
-import { createClient } from 'redis';
+const redis = require('redis');
 
 class RedisClient extends BaseDataStoreClient {
     constructor(connectionConfig = {}) {
         super(connectionConfig);
-        this._client = createClient();
+        this._client = redis.createClient();
     }
 
     /**
@@ -15,9 +14,9 @@ class RedisClient extends BaseDataStoreClient {
      * @returns {Object} value
      */
     async get(key) {
-        await client.connect();
-        const value = await client.get(key);
-        await client.disconnect();
+        await this._client.connect();
+        const value = await this._client.get(key);
+        await this._client.disconnect();
         return value;
     }
 
@@ -29,9 +28,9 @@ class RedisClient extends BaseDataStoreClient {
      * @returns null
      */
     async set(key, value) {
-        await client.connect();
-        await client.set(key, value);
-        await client.disconnect();
+        await this._client.connect();
+        await this._client.set(key, value);
+        await this._client.disconnect();
     }
 }
 

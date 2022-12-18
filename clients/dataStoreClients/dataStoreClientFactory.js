@@ -1,7 +1,7 @@
 const RedisClient = require('./redisClient');
 
 class DataStoreClientFactory {
-    static createSourceClient() {
+    static createDataStoreClient() {
         const connectionConfig = {}; // local setup
         
         // if we change the client in future, we init a different client object here
