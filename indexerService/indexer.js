@@ -2,7 +2,6 @@ const constants = require('commons').Constants;
 const helpers = require('commons').Helpers;
 const SourceClientFactory = require('source-clients').SourceClientFactory;
 const QueueClientFactory = require('queue-clients').QueueClientFactory;
-const util = require('util');
 
 const PIPELINE_NAME = process.env.PIPELINE_NAME;
 if (!PIPELINE_NAME) {
@@ -26,6 +25,7 @@ const jobHandler = async (job) => {
     console.info(`\n\nIndexing file ${JSON.stringify(job.data.file)}`);
     const fileData = await fetchFile(job.data);
     const text = await helpers.getTextFromFile(fileData.type, fileData.buffer);
+    console.log(text);
 }
 
 indexerQueueClient.listenToQueue(jobHandler);

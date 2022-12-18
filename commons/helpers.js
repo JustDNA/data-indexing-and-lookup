@@ -9,6 +9,7 @@
 
 var cronParser = require('cron-parser');
 const textract = require('textract');
+const util = require('util');
 
 /**
  * @method getLastTimeWindowForCron
@@ -44,5 +45,5 @@ exports.getLastTimeWindowForCron = function(cronExpression) {
  * @returns {String} text contents of the file
  */
 exports.getTextFromFile = async function(fileType, fileBuffer) {
-    const text = await util.promisify(textract.fromBufferWithMime)(fileType, fileBuffer);
+    return await util.promisify(textract.fromBufferWithMime)(fileType, fileBuffer);
 };
