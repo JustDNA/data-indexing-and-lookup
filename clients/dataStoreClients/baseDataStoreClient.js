@@ -24,7 +24,7 @@ class BaseDataStoreClient {
      * @returns null
      */
     async set(key, value) {
-        throw new Error('Implementation not available for listenToQueue');
+        throw new Error('Implementation not available for set');
     }
 }
 
