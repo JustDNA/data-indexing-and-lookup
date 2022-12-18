@@ -23,7 +23,7 @@ const dataStoreClient = DataStoreClientFactory.createDataStoreClient();
         await dataStoreClient.get(constants.DATASTORE_TABLES.PILELINE_CONFIGS);
     const pipelinesConfigs = JSON.parse(pipelinesConfigsString);
     
-    console.log('CONFIGS', pipelinesConfigs);
+    console.log('PIPELINES CONFIGS', pipelinesConfigs);
     
     for (const config of pipelinesConfigs) {
         const monitorQueueClient =
