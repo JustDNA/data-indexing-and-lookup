@@ -1,5 +1,6 @@
 const constants = require('commons').Constants;
 const helpers = require('commons').Helpers;
+const SearchEngineClientFactory = require('search-engine-clients').SearchEngineClientFactory;
 const SourceClientFactory = require('source-clients').SourceClientFactory;
 const QueueClientFactory = require('queue-clients').QueueClientFactory;
 
@@ -13,19 +14,24 @@ const indexerQueueClient = QueueClientFactory.createQueueClient(
     constants.PIPELINE_STAGES.FILE_INDEXING
 );
 
-const fetchFile = async (eventData) => {
-    const config = eventData.config;
-    const sourceClient = SourceClientFactory.createSourceClient(
-                            config.sourceType, config.sourceConfig
-                        );
-    return await sourceClient.getFile(eventData.file);
-}
+const indexFileData = async (text, metadata) => {
+    const searchEngineClient = SearchEngineClientFactory.createSearchEngineClient();
+    await searchEngineClient.indexText(text, metadata);
+};
 
 const jobHandler = async (job) => {
     console.info(`\n\nIndexing file ${JSON.stringify(job.data.file)}`);
-    const fileData = await fetchFile(job.data);
+    
+    const config = job.data.config;
+    const sourceClient = SourceClientFactory.createSourceClient(
+                            config.sourceType, config.sourceConfig
+                        );
+    const fileData = await sourceClient.getFile(job.data.file);
+    const fileMetadata = await sourceClient.getFileMetadata(job.data.file);
+
     const text = await helpers.getTextFromFile(fileData.type, fileData.buffer);
-    console.log(text);
+    
+    await indexFileData(text, fileMetadata);
 }
 
 indexerQueueClient.listenToQueue(jobHandler);

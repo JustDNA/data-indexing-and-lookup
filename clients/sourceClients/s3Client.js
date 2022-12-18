@@ -56,7 +56,17 @@ class S3Client extends BaseSourceClient {
      * @returns {Object} file metadata
      */
     async getFileMetadata(sourceFileLocation) {
-        throw new Error('Implementation not available for listenToQueue'); // tbd
+        const params = {
+            Bucket: this._sourceConfig.bucket,
+            Key: sourceFileLocation.Key
+        };
+        const metadata = await util.promisify(this._s3.headObject).bind(this._s3)(params);
+        const fullMetadata = {
+            ...metadata,
+            Bucket: this._sourceConfig.bucket,
+            Key: sourceFileLocation.Key
+        };
+        return fullMetadata;
     }
 
     /**

@@ -8,6 +8,7 @@ module.exports = {
     },
     DATASOURCES: {
       S3: 's3'
-    }
+    },
+    DEFAULT_SEARCH_ENGINE_INDEX_NAME: 'global-index'
   };
   

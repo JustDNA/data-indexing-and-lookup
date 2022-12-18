@@ -1,0 +1,1 @@
+exports.SearchEngineClientFactory = require('./dataStoreClientFactory');

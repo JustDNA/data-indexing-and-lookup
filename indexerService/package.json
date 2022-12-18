@@ -5,6 +5,7 @@
   "dependencies": {
     "commons": "file:../commons",
     "queue-clients": "file:../clients/queueClients",
+    "search-engine-clients": "file:../clients/searchEngineClients",
     "source-clients": "file:../clients/sourceClients"
   },
   "devDependencies": {},
