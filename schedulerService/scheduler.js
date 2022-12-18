@@ -1,6 +1,7 @@
 const constants = require('commons').Constants;
 var cron = require('node-cron');
 const DataStoreClientFactory = require('datastore-clients').DataStoreClientFactory;
+const helpers = require('commons').Helpers;
 const QueueClientFactory = require('queue-clients').QueueClientFactory;
 
 /**
@@ -32,8 +33,16 @@ const dataStoreClient = DataStoreClientFactory.createDataStoreClient();
                 constants.PIPELINE_STAGES.SOURCE_MONITOR
             );
         cron.schedule(config.schedule, async () => {
-            console.log(`\ntriggering pipeline ${config.pipelineName}`);
-            await monitorQueueClient.addToQueue(config);
+            [ startTimestamp, endTimestamp ] = helpers.getLastTimeWindowForCron(config.schedule);
+            console.log(`\ntriggering pipeline ${config.pipelineName} ` +
+                `with start time ${startTimestamp} and end time ${endTimestamp}`);
+            await monitorQueueClient.addToQueue({
+                config,
+                timewindow: {
+                    startTimestamp,
+                    endTimestamp
+                }
+            });
         });
     }
 })();
