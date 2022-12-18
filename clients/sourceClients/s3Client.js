@@ -71,7 +71,10 @@ class S3Client extends BaseSourceClient {
             Key: sourceFileLocation.Key
         };
         const response = await util.promisify(this._s3.getObject).bind(this._s3)(params);
-        return response.Body;
+        return {
+            type: response.ContentType,
+            buffer: response.Body
+        };
     }
 }
 

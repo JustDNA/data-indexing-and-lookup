@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Assignment",
   "dependencies": {
-    "source-clients": "file:../clients/sourceClients",
+    "commons": "file:../commons",
     "queue-clients": "file:../clients/queueClients",
-    "commons": "file:../commons"
+    "source-clients": "file:../clients/sourceClients",
+    "textract": "^2.5.0"
   },
   "devDependencies": {},
   "scripts": {
