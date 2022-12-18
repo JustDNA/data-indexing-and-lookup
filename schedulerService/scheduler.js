@@ -3,12 +3,11 @@ var cron = require('node-cron');
 const DataStoreClientFactory = require('datastore-clients').DataStoreClientFactory;
 const QueueClientFactory = require('queue-clients').QueueClientFactory;
 
-const queueClient = QueueClientFactory.createQueueClient(constants.S3_QUEUE_NAME);
-
 /**
  * Ideally we should not be using a data store client (eg redis/mongo/etc) directly.
  * We should fetch condigs via a data model (every table at the data store will have a
- * data model). For POC, using redis client directly
+ * data model). Ideally, Mongodb/dynamodb is a better
+ * choice for storing the configs. For POC, using redisp.
  */
 const dataStoreClient = DataStoreClientFactory.createDataStoreClient();
 
@@ -23,11 +22,18 @@ const dataStoreClient = DataStoreClientFactory.createDataStoreClient();
     const pipelinesConfigsString =
         await dataStoreClient.get(constants.DATASTORE_TABLES.PILELINE_CONFIGS);
     const pipelinesConfigs = JSON.parse(pipelinesConfigsString);
+    
     console.log('CONFIGS', pipelinesConfigs);
+    
     for (const config of pipelinesConfigs) {
+        const monitorQueueClient =
+            QueueClientFactory.createQueueClient(
+                config.pipelineName,
+                constants.PIPELINE_STAGES.SOURCE_MONITOR
+            );
         cron.schedule(config.schedule, async () => {
-            console.log('triggering pipeline', pipelineName);
-            await queueClient.addToQueue(data);
+            console.log('triggering pipeline', config.pipelineName);
+            await monitorQueueClient.addToQueue(config.sourceParams);
         });
     }
 })();

@@ -1,5 +1,8 @@
 module.exports = {
-    S3_QUEUE_NAME: 's3-processor-queue',
+    PIPELINE_STAGES: {
+      SOURCE_MONITOR: 'source_monitor',
+      FILE_INDEXING: 'file_indexing'
+    },
     DATASTORE_TABLES: {
       PILELINE_CONFIGS: 'pipeline_configs'
     },
