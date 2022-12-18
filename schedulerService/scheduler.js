@@ -32,7 +32,7 @@ const dataStoreClient = DataStoreClientFactory.createDataStoreClient();
                 constants.PIPELINE_STAGES.SOURCE_MONITOR
             );
         cron.schedule(config.schedule, async () => {
-            console.log('triggering pipeline', config.pipelineName);
+            console.log(`\ntriggering pipeline ${config.pipelineName}`);
             await monitorQueueClient.addToQueue(config.sourceParams);
         });
     }
