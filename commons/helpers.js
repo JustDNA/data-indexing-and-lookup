@@ -30,7 +30,7 @@ exports.getLastTimeWindowForCron = function(cronExpression) {
     const endTimestamp = new Date(prevIntervalEnd).getTime();
 
     return [
-        0, // TEMP
+        startTimestamp,
         endTimestamp
     ]
 };
