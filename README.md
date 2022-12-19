@@ -30,7 +30,7 @@ DEMO VIDEO: https://drive.google.com/file/d/119r1gESuFnIx7Gk1geGHnwYsv5Pczw9S/vi
 ### List of file types that can be indexed by the system:
 For extracting text from any kind of file, textract module is used and it supports a wide variety of file types right out of the box. For few file types, the host machine may need to have certain softwares installed (like tesseract for image to text and xpdf for pdf to text). https://www.npmjs.com/package/textract/v/2.4.0#currently-extracts
 
-## Improvements in system:
+## Scope for improvements in system:
 - Capture deletes and renames of files at source
 - Track runtime states of different stages of the pipeline
 - Way to backfill holes (missed time windows) if the system was down for sometime
