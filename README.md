@@ -11,7 +11,8 @@
 ### Prerequisites (host machine need to have the following)
 - redis (used as the config store)
 - elasticsearch (used as search engine)
-- tesseract (used for text extraction from any kind of file)
+- tesseract (used for text extraction from image)
+- xpdf (used for text extraction from pdf)
 
 ### Adaptations made for local implementation:
 - Using redis instead of a an object store (for storing configs) like dynamodb or mongodb: easy to get started but interfaces are modularly defined to switch out to use any other object store
@@ -19,7 +20,7 @@
 - We use node scripts listening to queues (implemented with bull npm module) to represent an event driven environment
 
 ### List of file types that can be indexed by the system:
-For extracting text from any kind of file, textract module is used and it supports a wide variety of file types right out of the box. https://www.npmjs.com/package/textract/v/2.4.0#currently-extracts
+For extracting text from any kind of file, textract module is used and it supports a wide variety of file types right out of the box. For few file types, the host machine may need to have certain softwares installed (like tesseract for image to text and xpdf for pdf to text). https://www.npmjs.com/package/textract/v/2.4.0#currently-extracts
 
 ## Improvements in system:
 - Capture deletes and renames of files at source
