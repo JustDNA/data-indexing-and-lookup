@@ -33,6 +33,7 @@ For extracting text from any kind of file, textract module is used and it suppor
 ## Improvements in system:
 - Capture deletes and renames of files at source
 - Track runtime states of different stages of the pipeline
+- Way to backfill holes (missed time windows) if the system was down for sometime
 - Backfill of files (indexing files from before)
 - Have separate dead letter queues at every stage to capture events that failed after exhausting retries
 - Whitelist/blacklist list of files to be pulled from source
