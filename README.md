@@ -1,15 +1,15 @@
+## Requirements of the system:
+- Connect to online data sources (file based), pull data
+- Fetch the contents of data in text format (data can be in any format). Eg: if there is a png image, the system should be able to extract text from the image
+- Index the text contents and file metadata to a search engine like elasticsearch
+- Expose an API `/search?query='...'` where the contents of files can be queried to find out the source files info that had matches.
+
 ## DEMO
 This is a demo video where I explain the
 - architecture (starts at 0:00)
 - local implementation (code structure) (starts at 13:35)
 - end-to-end demo (starts at 24:20)
 ![resources](https://drive.google.com/file/d/119r1gESuFnIx7Gk1geGHnwYsv5Pczw9S/view?usp=sharing)
-
-## Requirements of the system:
-- Connect to online data sources (file based), pull data
-- Fetch the contents of data in text format (data can be in any format). Eg: if there is a png image, the system should be able to extract text from the image
-- Index the text contents and file metadata to a search engine like elasticsearch
-- Expose an API `/search?query='...'` where the contents of files can be queried to find out the source files info that had matches.
 
 ## High level design:
 ![resources](https://docs.google.com/drawings/d/1z3Z2WJyDEvgjXPVIk9dTVhl9kgAt8pvgfN2tLYcup9E/export/png)
