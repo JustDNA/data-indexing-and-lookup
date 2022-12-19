@@ -9,7 +9,8 @@ This is a demo video where I explain the
 - architecture (starts at 0:00)
 - local implementation (code structure) (starts at 13:35)
 - end-to-end demo (starts at 24:20)
-![resources](https://drive.google.com/file/d/119r1gESuFnIx7Gk1geGHnwYsv5Pczw9S/view?usp=sharing)
+
+DEMO VIDEO: https://drive.google.com/file/d/119r1gESuFnIx7Gk1geGHnwYsv5Pczw9S/view?usp=sharing
 
 ## High level design:
 ![resources](https://docs.google.com/drawings/d/1z3Z2WJyDEvgjXPVIk9dTVhl9kgAt8pvgfN2tLYcup9E/export/png)
