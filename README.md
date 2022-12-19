@@ -1,3 +1,10 @@
+## DEMO
+This is a demo video where I explain the
+- architecture (starts at 0:00)
+- local implementation (code structure) (starts at 13:35)
+- end-to-end demo (starts at 24:20)
+![resources](https://drive.google.com/file/d/119r1gESuFnIx7Gk1geGHnwYsv5Pczw9S/view?usp=sharing)
+
 ## Requirements of the system:
 - Connect to online data sources (file based), pull data
 - Fetch the contents of data in text format (data can be in any format). Eg: if there is a png image, the system should be able to extract text from the image
